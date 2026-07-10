@@ -35,7 +35,7 @@ def check_product(name, url):
         text = r.text
 
         # 임시 기준: 품절 문구가 없으면 확인 알림
-        if "품절" not in text:
+        if "구매불가" not in text:
             send_push(name, url)
 
     except Exception as e:
