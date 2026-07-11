@@ -1,9 +1,9 @@
 name: Pokemon Card Stock Alarm v2
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: "*/5 * * * *"
-  workflow_dispatch:
 
 jobs:
   check-stock:
