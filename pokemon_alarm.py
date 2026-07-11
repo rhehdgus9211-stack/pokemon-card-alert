@@ -9,7 +9,9 @@ def check_product(name, url):
         )
 
         text = r.text
-        print(text[:2000])
+        print(name, "페이지 확인")
+print("구매불가 포함:", "구매불가" in text)
+print("품절 포함:", "품절" in text)
 
         # 구매불가가 없으면 상태 확인 알림
         if "구매불가" not in text:
