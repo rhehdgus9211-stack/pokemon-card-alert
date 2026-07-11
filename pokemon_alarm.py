@@ -9,6 +9,7 @@ def check_product(name, url):
         )
 
         text = r.text
+        print(text[:2000])
 
         # 구매불가가 없으면 상태 확인 알림
         if "구매불가" not in text:
