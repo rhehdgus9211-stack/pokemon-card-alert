@@ -14,11 +14,12 @@ PRODUCTS = {
 def send_push(name, url):
     requests.post(
         f"https://ntfy.sh/{NTFY_TOPIC}",
-        data=f"Pokemon card test\n{name}\n{url}",
+        data=f"Pokemon card available!\n{name}\n{url}",
         headers={
             "Title": "Pokemon Card Alert",
             "Priority": "high"
-        }
+        },
+        timeout=10
     )
 
 
@@ -34,15 +35,20 @@ def check_product(name, url):
 
         text = r.text
 
-        print(name, "페이지 확인")
-        print("구매불가 포함:", "구매불가" in text)
-        print("품절 포함:", "품절" in text)
+        has_unavailable = "구매불가" in text
 
-        # 테스트용 무조건 알림
-        send_push(name, url)
+        print(name, "확인")
+        print("구매불가:", has_unavailable)
+
+        # 구매불가가 없으면 구매 가능 상태로 판단
+        if not has_unavailable:
+            send_push(name, url)
+            print("알림 전송:", name)
+        else:
+            print("재고 없음:", name)
 
     except Exception as e:
-        print(name, e)
+        print(name, "오류:", e)
 
 
 for name, url in PRODUCTS.items():
