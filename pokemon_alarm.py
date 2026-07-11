@@ -19,3 +19,7 @@ def check_product(name, url):
 
     except Exception as e:
         print(name, e)
+
+
+for name, url in PRODUCTS.items():
+    check_product(name, url)
