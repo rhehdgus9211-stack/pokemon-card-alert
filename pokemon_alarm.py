@@ -14,10 +14,11 @@ PRODUCTS = {
 def send_push(name, url):
     requests.post(
         f"https://ntfy.sh/{NTFY_TOPIC}",
-        data=f"Pokemon card available!\n{name}\n{url}",
+        data=f"{name} 구매 가능!\n상품 페이지로 이동하세요.",
         headers={
             "Title": "Pokemon Card Alert",
-            "Priority": "high"
+            "Priority": "high",
+            "Actions": f"view,구매하기,{url}"
         },
         timeout=10
     )
@@ -40,7 +41,6 @@ def check_product(name, url):
         print(name, "확인")
         print("구매불가:", has_unavailable)
 
-        # 구매불가가 없으면 구매 가능 상태로 판단
         if not has_unavailable:
             send_push(name, url)
             print("알림 전송:", name)
