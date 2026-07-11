@@ -14,9 +14,9 @@ PRODUCTS = {
 def send_push(name, url):
     requests.post(
         f"https://ntfy.sh/{NTFY_TOPIC}",
-        data=f"🎉 {name} 구매 가능 확인!\n{url}",
+        data=f"🎉 테스트 알림\n{name}\n{url}",
         headers={
-            "Title": "포켓몬 카드 재고 알림",
+            "Title": "포켓몬 카드 알림 테스트",
             "Priority": "high"
         }
     )
@@ -38,8 +38,8 @@ def check_product(name, url):
         print("구매불가 포함:", "구매불가" in text)
         print("품절 포함:", "품절" in text)
 
-        if "구매불가" not in text:
-            send_push(name, url)
+        # 테스트용: 무조건 알림
+        send_push(name, url)
 
     except Exception as e:
         print(name, e)
